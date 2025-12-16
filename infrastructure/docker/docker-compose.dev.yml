@@ -9,35 +9,45 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=password
 
+  nats:
+    image: nats:2.10
+    container_name: nats
+    ports:
+      - "4222:4222"
+    command: ["-js"]
+    networks:
+      - backend
+  
   gateway:
     build: ../../gateway/api-gateway
     container_name: gateway
-    image: kevin24karat/gateway:0.0.1
     networks:
       - frontend
       - backend
     environment:
-      - SECRETJWTKEY=mysecretkey
+      SECRETJWTKEY: mysecretkey
+      NATSURL: nats://nats:4222
     ports:
-      - 3000:3000
+      - "3000:3000"
 
   auth_service:
     build: ../../services/auth-service
     container_name: auth_service
-    image: kevin24karat/auth_service:0.0.1
     networks:
       - backend
     environment:
-      - SECRETJWTKEY=mysecretkey
+      SECRETJWTKEY: mysecretkey
+      NATSURL: nats://nats:4222
     depends_on:
       - mongodb
 
   user_service:
     build: ../../services/user-service
     container_name: user_service
-    image: kevin24karat/user_service:0.0.1
     networks:
       - backend
+    environment:
+      NATSURL: nats://nats:4222
     depends_on:
       - mongodb
       - auth_service
@@ -45,9 +55,10 @@ services:
   universe_service:
     build: ../../services/univer-service
     container_name: universe_service
-    image: kevin24karat/universe_service:0.0.1
     networks:
       - backend
+    nvironment:
+      NATSURL: nats://nats:4222
     depends_on:
       - mongodb
       - auth_service
@@ -55,9 +66,10 @@ services:
   project_service:
     build: ../../services/project-service
     container_name: project_service
-    image: kevin24karat/project_service:0.0.1
     networks:
       - backend
+    nvironment:
+      NATSURL: nats://nats:4222
     depends_on:
       - mongodb
       - auth_service

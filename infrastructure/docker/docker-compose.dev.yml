@@ -1,0 +1,67 @@
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    networks:
+      - backend
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+  gateway:
+    build: ../../gateway/api-gateway
+    container_name: gateway
+    image: kevin24karat/gateway:0.0.1
+    networks:
+      - frontend
+      - backend
+    environment:
+      - SECRETJWTKEY=mysecretkey
+    ports:
+      - 3000:3000
+
+  auth_service:
+    build: ../../services/auth-service
+    container_name: auth_service
+    image: kevin24karat/auth_service:0.0.1
+    networks:
+      - backend
+    environment:
+      - SECRETJWTKEY=mysecretkey
+    depends_on:
+      - mongodb
+
+  user_service:
+    build: ../../services/user-service
+    container_name: user_service
+    image: kevin24karat/user_service:0.0.1
+    networks:
+      - backend
+    depends_on:
+      - mongodb
+      - auth_service
+
+  universe_service:
+    build: ../../services/univer-service
+    container_name: universe_service
+    image: kevin24karat/universe_service:0.0.1
+    networks:
+      - backend
+    depends_on:
+      - mongodb
+      - auth_service
+
+  project_service:
+    build: ../../services/project-service
+    container_name: project_service
+    image: kevin24karat/project_service:0.0.1
+    networks:
+      - backend
+    depends_on:
+      - mongodb
+      - auth_service
+
+networks:
+  frontend:
+  backend:

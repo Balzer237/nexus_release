@@ -29,7 +29,7 @@ export class ProjectsProxyController {
     return firstValueFrom(
       this.http.request({
         method,
-        url: `http://project-service:3000${url}`,
+        url: `http://project_service:3000${url}`,
         data,
         params,
         headers: {

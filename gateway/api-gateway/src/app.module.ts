@@ -8,6 +8,7 @@ import { AuthProxyController } from './proxy/auth.proxy';
 import { ProjectsProxyController } from './proxy/projet.proxy';
 import { UniversesProxyController } from './proxy/univer.proxy';
 import { UsersProxyController } from './proxy/user.proxy';
+import { VerifyToken } from 'lib/verifyToken';
 
 @Module({
   imports: [
@@ -28,7 +29,9 @@ import { UsersProxyController } from './proxy/user.proxy';
     
     
   ],
-  providers: [AppService],
+  providers: [
+    VerifyToken,
+    AppService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

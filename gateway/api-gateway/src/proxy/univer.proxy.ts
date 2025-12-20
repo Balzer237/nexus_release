@@ -11,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
-import { firstValueFrom } from 'rxjs';
 import { forward } from 'lib/requetForwar';
 
 @ApiBearerAuth()

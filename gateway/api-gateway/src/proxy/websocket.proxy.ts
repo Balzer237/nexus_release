@@ -39,9 +39,9 @@ export class ChatGateway
     const token = authHeader.replace('Bearer ', '');
 
     try {
-      const user = this.verifyToken.verify(token);
+      const user =  this.verifyToken.verify(token);
       client.data.user = user;
-      console.log('✅ User connected:', user.id);
+      console.log('✅ User connected:',client.data.user);
     } catch {
       client.disconnect();
     }

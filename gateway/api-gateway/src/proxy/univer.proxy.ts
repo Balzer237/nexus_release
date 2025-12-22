@@ -28,7 +28,7 @@ export class UniversesProxyController {
   // Create universe
   @Post('/universes')
   createUniverse(@Body() body: any, @Req() req: any) {
-    return forward('universe-service','post', '/universes', req, body);
+    return forward(this.http,'universe-service','post', '/universes', req, body);
   }
 
   // Get all universes (pagination + search)
@@ -41,7 +41,7 @@ export class UniversesProxyController {
     @Query('limit') limit: number,
     @Query('searchTerm') searchTerm?: string,
   ) {
-    return forward('universe-service','get', '/universes', null, null, {
+    return forward(this.http,'universe-service','get', '/universes', null, null, {
       page,
       limit,
       searchTerm,
@@ -51,7 +51,7 @@ export class UniversesProxyController {
   // Get popular universes
   @Get('/universes/popular')
   getPopularUniverses() {
-    return forward('universe-service','get', '/universes/popular');
+    return forward(this.http,'universe-service','get', '/universes/popular');
   }
 
   // Get universe by ID
@@ -61,6 +61,7 @@ export class UniversesProxyController {
     @Req() req: any,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'get',
       `/universes/${universeId}`,
@@ -77,6 +78,7 @@ export class UniversesProxyController {
     @Query('searchTerm') searchTerm?: string,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'get',
       `/users/${userId}/universes`,
@@ -94,6 +96,7 @@ export class UniversesProxyController {
     @Req() req: any,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'patch',
       `/universes/${universeId}`,
@@ -110,6 +113,7 @@ export class UniversesProxyController {
     @Req() req: any,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'patch',
       `/universes/${universeId}/visibility`,
@@ -126,6 +130,7 @@ export class UniversesProxyController {
     @Req() req: any,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'patch',
       `/universes/${universeId}/rules`,
@@ -146,6 +151,7 @@ export class UniversesProxyController {
     @Req() req: any,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'post',
       `/universes/${universeId}/join`,
@@ -163,6 +169,7 @@ export class UniversesProxyController {
     @Req() req: any,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'post',
       `/universes/${universeId}/participants/${participantId}/ban`,
@@ -182,6 +189,7 @@ export class UniversesProxyController {
     @Req() req: any,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'patch',
       `/universes/${universeId}/logo`,
@@ -196,6 +204,7 @@ export class UniversesProxyController {
     @Req() req: any,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'patch',
       `/universes/${universeId}/banner`,
@@ -214,6 +223,7 @@ export class UniversesProxyController {
     @Req() req: any,
   ) {
     return forward(
+      this.http,
         'universe-service',
       'delete',
       `/universes/${universeId}`,

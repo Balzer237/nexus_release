@@ -21,9 +21,10 @@ WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app/package*.json ./
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/dist ./dist
+COPY --from=builder /usr/src/app/tsconfig.json ./tsconfig.json
 
 # Exposer le port de l'application (facultatif, mais utile pour docker-compose)
 EXPOSE 3000
 
 # Une fois l'image generee, commande pour démarrer 
-CMD ["node", "dist/main.js"]
+CMD ["npm", "run", "start"]

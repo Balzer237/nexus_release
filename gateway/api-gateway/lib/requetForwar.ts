@@ -1,6 +1,7 @@
 import { firstValueFrom } from "rxjs";
 
 export function forward(
+    http,
     service,
     method: 'get' | 'post' | 'patch' | 'delete'|'put',
     url: string,
@@ -9,7 +10,7 @@ export function forward(
     params?: any,
   ) {
     return firstValueFrom(
-      this.http.request({
+      http.request({
         method,
         url: `http://${service}:3000${url}`,
         data,

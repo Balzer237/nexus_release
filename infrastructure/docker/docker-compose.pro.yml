@@ -2,12 +2,21 @@
 services:
   mongodb:
     image: mongo:6.0
-    container_name: mongodb
+    container_name: nexus_release_mongodb
     networks:
       - backend
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=password
+
+  nats:
+    image: nats:2.10
+    container_name: nats
+    ports:
+      - "4222:4222"
+    command: ["-js"]
+    networks:
+      - backend
 
   gateway:
     container_name: gateway
@@ -16,7 +25,8 @@ services:
       - frontend
       - backend
     environment:
-      - SECRETJWTKEY=mysecretkey
+      SECRETJWTKEY: mysecretkey
+      NATSURL: nats://nats:4222
     ports:
       - 3000:3000
 
@@ -26,7 +36,9 @@ services:
     networks:
       - backend
     environment:
-      - SECRETJWTKEY=mysecretkey
+      SECRETJWTKEY: mysecretkey
+      NATSURL: nats://nats:4222
+      MONGOURL: mongodb://root:password@mongodb:27017
     depends_on:
       - mongodb
 
@@ -35,6 +47,9 @@ services:
     image: kevin24karat/user_service:0.0.1
     networks:
       - backend
+    environment:
+      NATSURL: nats://nats:4222
+      MONGOURL: mongodb://root:password@mongodb:27017
     depends_on:
       - mongodb
       - auth_service
@@ -44,6 +59,9 @@ services:
     image: kevin24karat/universe_service:0.0.1
     networks:
       - backend
+    environment:
+      NATSURL: nats://nats:4222
+      MONGOURL: mongodb://root:password@mongodb:27017
     depends_on:
       - mongodb
       - auth_service
@@ -53,6 +71,9 @@ services:
     image: kevin24karat/project_service:0.0.1
     networks:
       - backend
+    environment:
+      NATSURL: nats://nats:4222
+      MONGOURL: mongodb://root:password@mongodb:27017
     depends_on:
       - mongodb
       - auth_service

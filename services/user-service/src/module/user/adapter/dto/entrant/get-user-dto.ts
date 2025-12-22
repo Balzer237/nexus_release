@@ -1,4 +1,4 @@
-import { LevelUser } from '../../domain/entities/userEntity';
+import { LevelUser } from "src/module/user/domaine/entities/userEntity";
 
 export class GetUserDto {
   id: string;

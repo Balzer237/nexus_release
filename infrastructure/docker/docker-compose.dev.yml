@@ -2,7 +2,7 @@
 services:
   mongodb:
     image: mongo:6.0
-    container_name: mongodb
+    container_name: nexus_release_mongodb
     networks:
       - backend
     environment:
@@ -38,6 +38,7 @@ services:
     environment:
       SECRETJWTKEY: mysecretkey
       NATSURL: nats://nats:4222
+      MONGOURL: mongodb://root:password@mongodb:27017
     depends_on:
       - mongodb
 
@@ -48,6 +49,7 @@ services:
       - backend
     environment:
       NATSURL: nats://nats:4222
+      MONGOURL: mongodb://root:password@mongodb:27017
     depends_on:
       - mongodb
       - auth_service
@@ -57,8 +59,9 @@ services:
     container_name: universe_service
     networks:
       - backend
-    nvironment:
+    environment:
       NATSURL: nats://nats:4222
+      MONGOURL: mongodb://root:password@mongodb:27017
     depends_on:
       - mongodb
       - auth_service
@@ -68,8 +71,9 @@ services:
     container_name: project_service
     networks:
       - backend
-    nvironment:
+    environment:
       NATSURL: nats://nats:4222
+      MONGOURL: mongodb://root:password@mongodb:27017
     depends_on:
       - mongodb
       - auth_service

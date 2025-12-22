@@ -7,7 +7,7 @@ import { HttpModule } from '@nestjs/axios';
 import { AuthProxyController } from './proxy/auth.proxy';
 import { ProjectsProxyController } from './proxy/projet.proxy';
 import { UniversesProxyController } from './proxy/univer.proxy';
-import { UsersProxyController } from './proxy/user.proxy';
+import { UsersProxyController } from './proxy/userProxy/user.proxy';
 import { VerifyToken } from 'lib/verifyToken';
 
 @Module({
@@ -41,6 +41,8 @@ export class AppModule {
       { path: 'auth/login', method: RequestMethod.POST },
       { path: 'auth/register', method: RequestMethod.POST },
       { path: 'auth/refresh', method: RequestMethod.POST },
+      {path: 'users', method:RequestMethod.POST},
+      {path: 'users/:id', method:RequestMethod.GET}
       
     )
     .forRoutes({ path: '*', method: RequestMethod.ALL });

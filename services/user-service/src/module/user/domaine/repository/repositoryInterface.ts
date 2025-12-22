@@ -1,7 +1,7 @@
 
-import { CreateUserDto } from 'src/module/adapter/dto/entrant/create-user-dto';
+import { CreateUserDto } from 'src/module/user/adapter/dto/entrant/create-user-dto';
 import { UserEntity } from '../entities/userEntity';
-import { filterUserDto } from 'src/module/adapter/dto/entrant/getUserDto';
+import { filterUserDto } from 'src/module/user/adapter/dto/entrant/getUserDto';
 
 export abstract class UserRepositoryInterface {
   abstract create(createUserDto: CreateUserDto): Promise<UserEntity>;

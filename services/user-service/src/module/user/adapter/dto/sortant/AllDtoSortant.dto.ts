@@ -1,6 +1,6 @@
 
 import { MediaType } from 'src/lib/type/mediaType';
-import { LevelUser, StateUser } from 'src/module/domaine/entities/userEntity';
+import { LevelUser, StateUser } from 'src/module/user/domaine/entities/userEntity';
 
 export class UserSortantDto {
   id: string;

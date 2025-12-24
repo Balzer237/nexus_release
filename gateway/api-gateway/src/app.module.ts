@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { jwtMiddleway } from './jwtmiddleway';
 import { JwtModule } from '@nestjs/jwt';
 import { HttpModule } from '@nestjs/axios';
-import { AuthProxyController } from './proxy/auth.proxy';
+import { AuthProxyController } from './proxy/authProxy/auth.proxy';
 import { ProjectsProxyController } from './proxy/projectProxy/projet.proxy';
 import { UniversesProxyController } from './proxy/univerProxy/univer.proxy';
 import { UsersProxyController } from './proxy/userProxy/user.proxy';

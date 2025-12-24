@@ -23,6 +23,7 @@ import { GetFollowerUserUseCase } from './application/use-cases/getFollowerUser.
 import { GetFollowingUserUseCase } from './application/use-cases/getFollowingUser.use-case';
 import { unFollowUser } from './application/use-cases/unFollowUser.user-case';
 import { userMongooseRepositoryImplementation } from './infrastructure/mongoose/repository-implementation';
+import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
@@ -33,6 +34,17 @@ import { userMongooseRepositoryImplementation } from './infrastructure/mongoose/
    ],
   controllers: [UsersController],
   providers: [
+     {
+    provide: 'NATS_PROVIDER',
+    useFactory: () => {
+      return ClientProxyFactory.create({
+        transport: Transport.NATS,
+        options: {
+          servers: [process.env.NATS_URL || 'nats://localhost:4222'],
+        },
+      });
+    }
+    },
     {
       provide: 'USER_REPOSITORY',
       useClass: userMongooseRepositoryImplementation,

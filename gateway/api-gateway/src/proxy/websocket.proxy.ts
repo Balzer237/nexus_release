@@ -8,7 +8,7 @@ import {
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { VerifyToken } from 'lib/verifyToken';
+import { VerifyToken } from 'src/lib/verifyToken';
 
 @WebSocketGateway({
   cors: {

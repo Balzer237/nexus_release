@@ -65,7 +65,6 @@ export class UsersController {
     @Query('limit') limit: number,
     @Query('query') query?: string | number,
   ) {
-    console.log('jentre',page,'limit',limit,'query',query)
     const filter: filterUserDto = {
       value: query && query,
       meta: {
@@ -75,7 +74,7 @@ export class UsersController {
     };
     const users = await this.FindAllUsersUseCase.execute(filter);
     const data =users.users.map((r) => UserMapper.userEntityToEntitySortant(r));
-    console.log('je suis la data user de retour',data);
+
     return data;
     }
 

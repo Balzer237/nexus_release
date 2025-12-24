@@ -12,13 +12,13 @@ import {
 } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { ApiBearerAuth, ApiParam, ApiQuery } from '@nestjs/swagger';
-import { forward } from 'lib/requetForwar';
+import { forward } from 'src/lib/requetForwar';
 import { CreateUserDto } from './dto/create-user-dto';
 import { AddSkillsDto } from './dto/addSkill';
 import { UpdatePasswordDto } from './dto/updatePassword.dto';
 import { AddSPointsDto } from './dto/addPoint';
 import { UpdateUserDto } from './dto/update-user-dto';
-import { coreResponse } from 'lib/responceStructure';
+import { coreResponse } from 'src/lib/responceStructure';
 
 @ApiBearerAuth()
 @Controller()

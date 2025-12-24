@@ -5,10 +5,10 @@ import { jwtMiddleway } from './jwtmiddleway';
 import { JwtModule } from '@nestjs/jwt';
 import { HttpModule } from '@nestjs/axios';
 import { AuthProxyController } from './proxy/auth.proxy';
-import { ProjectsProxyController } from './proxy/projet.proxy';
-import { UniversesProxyController } from './proxy/univer.proxy';
+import { ProjectsProxyController } from './proxy/projectProxy/projet.proxy';
+import { UniversesProxyController } from './proxy/univerProxy/univer.proxy';
 import { UsersProxyController } from './proxy/userProxy/user.proxy';
-import { VerifyToken } from 'lib/verifyToken';
+import { VerifyToken } from 'src/lib/verifyToken';
 
 @Module({
   imports: [

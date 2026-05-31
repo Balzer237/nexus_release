@@ -6,9 +6,11 @@ export class CreateProjectDto {
   description: string;
 
   user:any;
+
   Author: string;
 
   univer: string;
 
   dificulty: ProjectDifficulty;
+
 }

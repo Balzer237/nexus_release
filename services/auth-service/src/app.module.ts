@@ -8,10 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     MongooseModule.forRootAsync({
       useFactory: () => {
-        const uri = process.env.MONGOURL
-        if (!uri) {
-          throw new Error('MONGOURL is not defined in env');
-        }
+        const uri = process.env.MONGOURL ?? 'mongodb://127.0.0.1:27017/auth-service';
         return {
           uri,
           retryAttempts: 3,

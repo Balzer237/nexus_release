@@ -10,7 +10,6 @@ export class SuspendUserUseCase {
     ) {}
 
   async execute(id: string, reason: string, duration?: number) {
-    console.log('la', id);
     const user = await this.userRepository.findById(id);
     console.log('user', user);
     user.setState(StateUser.INACTIVE);

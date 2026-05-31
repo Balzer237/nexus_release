@@ -12,7 +12,7 @@ export class EventController{
 
     @EventPattern('user.created')
     handleUserCreated(data) {
-        console.log('je suis la data a auth',data);
+       
         const payload:CreateUserDto={
             id:data.id,
             password:data.password,

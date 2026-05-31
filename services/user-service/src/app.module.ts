@@ -8,10 +8,7 @@ import { UserModuleModule } from './module/user/user-module.module';
   imports: [
     MongooseModule.forRootAsync({
       useFactory: () => {
-        const uri = process.env.MONGOURL
-        if (!uri) {
-          throw new Error('MONGOURL is not defined in env');
-        }
+        const uri = process.env.MONGOURL ?? 'mongodb://127.0.0.1:27017/user-service';
         return {
           uri,
           retryAttempts: 3,

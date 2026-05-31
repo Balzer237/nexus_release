@@ -17,7 +17,7 @@ services:
     command: ["-js"]
     networks:
       - backend
-  
+
   gateway:
     build: ../../gateway/api-gateway
     container_name: gateway

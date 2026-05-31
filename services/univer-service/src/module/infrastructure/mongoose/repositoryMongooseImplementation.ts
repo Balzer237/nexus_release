@@ -114,7 +114,7 @@ export class RepositoryMongooseImplementation extends RepositoryInterface {
         },
       },
 
-      // 2️⃣ On déplie le tableau "univer"
+      // On déplie le tableau "univer"
       { $unwind: '$univer' },
       {
         $match: {
@@ -156,8 +156,7 @@ export class RepositoryMongooseImplementation extends RepositoryInterface {
     } catch (error) {
       throw new InternalServerErrorException('Internal error ' + error + '');
     }
-    console.log('allUniver', allUnivers);
-
+  
     const countPipeline = pipeline.filter(
       (stage: any) => !('$skip' in stage || '$limit' in stage),
     );

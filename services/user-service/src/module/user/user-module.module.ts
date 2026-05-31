@@ -27,6 +27,7 @@ import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
+    
     MongooseModule.forFeature([
       { name: 'User', schema: userSchema },
       { name: 'Relationship', schema: RelationshipSchema },

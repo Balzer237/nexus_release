@@ -6,26 +6,26 @@ import { univerStatus, UniverVisibility } from 'src/module/domaine/entities/univ
 @Schema({ _id: false })
 class state {
   @Prop({ type: Number, default: 0 })
-  numberOfMember: number;
+  numberOfMember!: number;
 
   @Prop({ type: Number, default: 0 })
-  numberOfProject: number;
+  numberOfProject!: number;
 
   @Prop({ type: Number, default: 0 })
-  numberOfModerator: number;
+  numberOfModerator!: number;
 
   @Prop({ type: Number, default: 0 })
-  numberOfExpert: number;
+  numberOfExpert!: number;
 
   @Prop({ type: Number, default: 0 })
-  mediaCount: number;
+  mediaCount!: number;
 }
 const stateSchema = SchemaFactory.createForClass(state);
 
 @Schema({ _id: false })
 class rule {
   @Prop()
-  codeOfConduct: string;
+  codeOfConduct!: string;
 
   @Prop({
     type: String,
@@ -33,49 +33,49 @@ class rule {
     required: true,
     default: LevelUser.NOVICE,
   })
-  expertiseLevelREquired: LevelUser;
+  expertiseLevelREquired!: LevelUser;
 }
 const ruleSchema = SchemaFactory.createForClass(rule);
 
 @Schema({ timestamps: true })
 export class universSchema {
   @Prop({ type: String, required: true })
-  name: string;
+  name!: string;
 
   @Prop({ type: String })
-  description: string;
+  description!: string;
 
   @Prop({ type: Object, default: () => ({}) })
-  logo: any;
+  logo!: any;
 
   @Prop({ type: Object, default: () => ({}) })
-  baner: any;
+  baner!: any;
 
   @Prop({
     type: String,
     enum: Object.values(univerStatus),
     default: univerStatus.ACTIF,
   })
-  status: univerStatus;
+  status!: univerStatus;
 
   @Prop({
     type: String,
     enum: Object.values(UniverVisibility),
     default: UniverVisibility.PUBLIC,
   })
-  visibility: UniverVisibility;
+  visibility!: UniverVisibility;
 
   @Prop({ type: Types.ObjectId, required: true })
-  createdBy: string;
+  createdBy!: string;
 
   @Prop({ type: stateSchema, default: () => ({}) })
-  state: state;
+  state!: state;
 
   @Prop({ default: new Date() })
-  lastActivityAt: Date;
+  lastActivityAt!: Date;
 
   @Prop({ type: ruleSchema, default: () => ({}) })
-  rules: rule;
+  rules!: rule;
 }
 
 export type UniverDocumen = Document & universSchema;

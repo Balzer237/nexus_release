@@ -19,7 +19,7 @@ export class LoginUseCase {
       throw new NotFoundException('This password is incorrect');
     }
 
-    const token = await this.jwtService.sign(exist);
+    const token = this.jwtService.sign(exist);
     return {
       id: exist.id,
       user: exist.username,

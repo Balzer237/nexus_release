@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
+import { ProjectsController } from './adapter/res/projectController';
 import { UpdateBaniereProjectUsecase } from './application/use-case/updateBaniereProject.usecase';
 import { UpdateProjectUsecase } from './application/use-case/updateProject.usecase';
 import { UpdateChapterUsecase } from './application/use-case/updateChatpter.usecase';
@@ -51,6 +52,7 @@ import { chapterSchema } from './infrastructure/mongoose/schema/chapterSchema';
       { name: 'Chapter', schema: chapterSchema },
     ]),
     ],
+    controllers: [ProjectsController],
     providers:[
         {
             provide: 'NATS_PROVIDER',
@@ -58,7 +60,7 @@ import { chapterSchema } from './infrastructure/mongoose/schema/chapterSchema';
             return ClientProxyFactory.create({
                 transport: Transport.NATS,
                 options: {
-                servers: [process.env.NATS_URL || 'nats://localhost:4222'],
+                servers: [process.env.NATSURL || process.env.NATS_URL || 'nats://localhost:4222'],
                 },
             });
             }

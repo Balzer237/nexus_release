@@ -22,7 +22,7 @@ async function bootstrap() {
   app.connectMicroservice({
     transport: Transport.NATS,
     options: {
-      servers: [process.env.NATS_URL],
+      servers: [process.env.NATSURL || process.env.NATS_URL || 'nats://localhost:4222'],
     },
   });
 

@@ -1,4 +1,5 @@
-import { Inject, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from "src/module/adapter/dto/createUserDto";
 import { RepositoryInterface } from "src/module/domain/repository/repositoryInterface";
 import { userDocument } from "./schema/loginSchema";
@@ -7,7 +8,7 @@ import { Model } from "mongoose";
 @Injectable()
 export class RepositoryImplementation implements RepositoryInterface{
 
-    constructor(@Inject('userSchema') private readonly userModel:Model<userDocument>){}
+    constructor(@InjectModel('userSchema') private readonly userModel: Model<userDocument>){ }
 
     async createUser({ data }: { data: CreateUserDto; }): Promise<any> {
         try {

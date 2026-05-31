@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.NATS,
     options: {
-      servers: [process.env.NATSURL || 'nats://localhost:4222'],
+      servers: [process.env.NATSURL || process.env.NATS_URL || 'nats://localhost:4222'],
     },
   });
 

@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ProjectsController } from './module/adapter/res/projectController';
 import { ProjectModule } from './module/prjectModule';
 import { MongooseModule } from '@nestjs/mongoose';
 
@@ -18,9 +17,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
     ProjectModule],
 
-  controllers: [
-    ProjectsController
-  ],
+  controllers: [],
 
   providers: [AppService],
 })

@@ -23,7 +23,7 @@ import { LoginUseCase } from './application/login.usecase';
                 return ClientProxyFactory.create({
                     transport: Transport.NATS,
                     options: {
-                    servers: [process.env.NATS_URL || 'nats://localhost:4222'],
+                    servers: [process.env.NATSURL || process.env.NATS_URL || 'nats://localhost:4222'],
                     },
                 });
             }

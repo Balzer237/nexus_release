@@ -6,8 +6,8 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class LoginUseCase {
   constructor(
-    @Inject('repositoryImplementation') private readonly repo:RepositoryInterface,
-    private readonly jwtService: JwtService
+    @Inject('RepositoryImplementation') private readonly repo: RepositoryInterface,
+    private readonly jwtService: JwtService,
   ) {}
   async execute({ email, password }: { email: string; password: string }) {
     const exist = await this.repo.getUserByEmail({email});

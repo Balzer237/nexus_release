@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
+import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { loginSchema } from './infrastructure/mongoose/schema/loginSchema';
 import { RepositoryImplementation } from './infrastructure/mongoose/repositoryImplementation';
@@ -9,6 +10,10 @@ import { LoginUseCase } from './application/login.usecase';
 
 @Module({
     imports:[
+        JwtModule.register({
+            secret: process.env.SECRETJWTKEY ?? 'mysecretkey',
+            signOptions: { expiresIn: '1h' },
+        }),
         MongooseModule.forFeature([{name:'userSchema', schema:loginSchema}])
     ],
     providers:[
